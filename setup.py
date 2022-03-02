@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-try: # for pip >= 10
-    from pip._internal.req import parse_requirements
-except ImportError: # for pip <= 9.0.3
-    from pip.req import parse_requirements
+from pip._internal.req import parse_requirements
+
 try:
     from setuptools import setup
 except ImportError:
@@ -17,8 +15,8 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = [str(i.req) for i in parse_requirements('requirements.txt', session=False)]
-test_requirements = [str(i.req) for i in parse_requirements('requirements_dev.txt', session=False)]
+requirements = [str(i.requirement) for i in parse_requirements('requirements.txt', session=False)]
+test_requirements = [str(i.requirement) for i in parse_requirements('requirements_dev.txt', session=False)]
 
 setup(
     name='swagger_parser',
